@@ -2,7 +2,7 @@ var Slack, autoMark, autoReconnect, slack, token;
 
 Slack = require('..');
 
-token = 'xoxb-4185063059-sWXXWFHRZC5DnHtbVfone53j';
+token = process.env.JERKBOT_KEY;
 
 autoReconnect = true;
 
@@ -56,8 +56,8 @@ slack.on('message', function(message) {
   channelName = channelName + (channel ? channel.name : 'UNKNOWN_CHANNEL');
   userName = (user != null ? user.name : void 0) != null ? "@" + user.name : "UNKNOWN_USER";
   console.log("Received: " + type + " " + channelName + " " + userName + " " + ts + " \"" + text + "\"");
-  var random = Math.floor(Math.random() * 20) + 1
-  if (type === 'message' && (text != null) && (channelName != '#general') && random ===1) {
+  var random = Math.floor(Math.random() * 2) + 1
+  if (type === 'message' && (text != null) && (channelName != '#general') && random === 2) {
     response = text.split('').reverse().join('') + ' :poop:';
     channel.send(response);
     return console.log("@" + slack.self.name + " responded with \"" + response  + "\"");
